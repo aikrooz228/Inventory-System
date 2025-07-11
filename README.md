@@ -1,1 +1,1 @@
-Inventory System
+ Drinks Inventory System
