@@ -36,7 +36,9 @@ def insert(request):
         cursor = mysql.connection.cursor()  
         cursor.execute("INSERT INTO soft_drinks_tbl (name_of_drink, price, quantity, expiry_date, batch_number, drink_subtype) VALUES (%s, %s, %s, %s, %s, %s)", (name, price, quantity, expiry_date, batch_number, drink_subtype))
         mysql.connection.commit()
+        flash("Drinks added Successfully")
         return redirect(url_for('Index'))
+
 @app.route('/details', methods=['GET'])
 
 def details():
