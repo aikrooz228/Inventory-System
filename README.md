@@ -1,1 +1,1 @@
-## Python MySQL CRUD Project
+Inventory System
