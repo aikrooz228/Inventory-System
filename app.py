@@ -45,6 +45,7 @@ def details():
     cursor.execute("SELECT * FROM soft_drinks_tbl")
     data = cursor.fetchall()
     cursor.close()
+    return jsonfy({data:data})
     
     
 
