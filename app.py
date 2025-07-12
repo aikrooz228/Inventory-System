@@ -24,7 +24,7 @@ def Index():
 
 
 @app.route('/insert', methods=['POST'])
-def insert(request):
+def insert(id):
     if request.method == 'POST':
         name = request.form['name_of_drink']
         price = request.form['price']
