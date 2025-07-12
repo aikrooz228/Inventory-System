@@ -49,7 +49,10 @@ def details():
     return jsonify({ "data": data })
     
 
-app.route('/delete/id', methods=["DELETE"])
-def delete():
+app.route('/delete/<int:id>', methods=['POST'])
+def delete(id):
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM soft_drinks_tbl")
+    cursor.execute("DELETE FROM soft_drinks_tbl WHERE id = %s", [id])
+    mysql.connection.commit()
+    flash("Drink Deleted Successfully!")
+    return redirect(url_for('Index'))
