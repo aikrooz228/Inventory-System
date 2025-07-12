@@ -24,7 +24,7 @@ def Index():
 
 
 @app.route('/insert', methods=['POST'])
-def insert(id):
+def insert():
     if request.method == 'POST':
         name = request.form['name_of_drink']
         price = request.form['price']
@@ -40,13 +40,12 @@ def insert(id):
         return redirect(url_for('Index'))
 
 @app.route('/details', methods=['GET'])
-
 def details():
     cursor = mysql.connection.cursor()
     cursor.execute("SELECT * FROM soft_drinks_tbl")
     data = cursor.fetchall()
     cursor.close()
-    return jsonify({ "data": data })
+    
     
 
 app.route('/delete/<int:id>', methods=['POST'])
