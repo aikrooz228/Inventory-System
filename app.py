@@ -3,7 +3,7 @@ from werkzeug.utils import redirect
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
-app.secret_key = 'some_random_data'
+app.secret_key = 's'
 
 
 app.config['MYSQL_HOST'] = 'localhost'
@@ -55,6 +55,29 @@ def delete(id):
     cursor.close()
     flash("Record Deleted Successfully")
     return redirect(url_for('Index'))
+
+def edit(id):
+    cursor = mysql.connection.cursor()
+    if request.method == 'POST':
+        name = request.form['name_of_drink']
+        price = request.form['price']
+        quantity = request.form['quantity']
+        expiry_date = request.form['expiry_date']
+        batch_number = request.form['batch_number']
+        drink_subtype = request.form['drink_subtype']
+
+        cursor.execute("UPDATE soft_drinks_tbl SET name_of_drink=%s, price=%s, quantity=%s, expiry_date=%s, batch_number=%s, drink_subtype=%s WHERE id=%s",
+                       (name, price, quantity, expiry_date, batch_number, drink_subtype, id))
+        mysql.connection.commit()
+        cursor.close()
+        flash("Record Updated Successfully")
+        return redirect(url_for('Index'))
+    else:
+        cursor.execute("SELECT * FROM soft_drinks_tbl WHERE id=%s", (id,))
+        data = cursor.fetchone()
+        cursor.close()
+        return render_template('edit.html', drink=data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
