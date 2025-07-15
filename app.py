@@ -53,4 +53,5 @@ def delete(id):
     cursor.execute("DELETE FROM soft_drinks_tbl WHERE id = %s", (id,))
     mysql.connection.commit()
     cursor.close()
+    flash("Record Deleted Successfully")
     return redirect(url_for('Index'))
