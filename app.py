@@ -55,3 +55,6 @@ def delete(id):
     cursor.close()
     flash("Record Deleted Successfully")
     return redirect(url_for('Index'))
+
+if __name__ == '__main__':
+    app.run(debug=True)
