@@ -74,10 +74,10 @@ def edit(id):
         return render_template('edit.html', drink=data)
 
 
-@app.route('/delete/<int:id>', methods=['POST'])
+@app.route('/delete/<int:id>', methods=["POST", "DELETE"])
 def delete(id):
     cursor = mysql.connection.cursor()
-    cursor.execute("DELETE FROM soft_drinks_tbl WHERE id = %s", [id])
+    cursor.execute("DELETE FROM soft_drinks_tbl WHERE id = %s", (id,))
     mysql.connection.commit()
-    flash("Drink Deleted Successfully!")
+    cursor.close()
     return redirect(url_for('Index'))
